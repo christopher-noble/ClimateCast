@@ -18,13 +18,13 @@ Follow these instructions to get ClimateCast up and running on your local machin
 
 ### Prerequisites
 
-- Node.js (LTS version recommended)
-- npm (comes with Node.js)
+- Node.js
+- npm
 
 ### Installation
 
 1. Clone the repository:
-`git clone <repository-url>`
+`git clone https://github.com/christopher-noble/ClimateCast`
 
 2. Navigate to the project directory:
 `cd ClimateCast`
@@ -48,17 +48,16 @@ Follow these instructions to get ClimateCast up and running on your local machin
 
 - **End-to-End Tests with Cypress:**
 - To run tests headlessly:
+
   ```
   npx cypress run
   ```
+
 - To open the Cypress Test Runner for interactive testing:
+
   ```
   npx cypress open
   ```
-
-## Contributing
-
-Contributions are welcome! If you have suggestions to improve ClimateCast, please fork the repo and create a pull request. You can also open an issue with the tag "enhancement". Don't forget to give the project a star! Thanks again!
 
 ## License
 
