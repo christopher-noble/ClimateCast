@@ -18,7 +18,7 @@ import { FourteenDayCardProps } from '@/utils/interfaces/component-props';
 const FourteenDayCard: React.FC<FourteenDayCardProps> = ({ date, iconUrl, highTemp, lowTemp }) => {
 
   return (
-    <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-7 m-3 text-m w-32 h-68">
+    <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-7 m-3 text-m w-32 h-68" data-testid="fourteen-day-card">
       <p className="text-black-500">{formatDateAbbreviation(date)}</p>
       <img src={iconUrl} alt="Weather Icon" className="w-32" />
       <p className="font-semibold mt-4">H: {roundNumber(highTemp)}°</p>

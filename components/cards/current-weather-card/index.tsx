@@ -45,7 +45,7 @@ const CurrentWeatherCard: React.FC<CurrentWeatherCardProps> = ({
   sunrise,
 }) => {
   return (
-    <div className="flex shadow-lg bg-white rounded-lg ml-6 mr-6">
+    <div className="flex shadow-lg bg-white rounded-lg ml-6 mr-6" data-testid="current-weather-card">
       <div className="grid md:grid-cols-2 gap-3 w-full p-12">
         <div className="space-y-3 text-2xl">
           <div className="element-layout">

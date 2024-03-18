@@ -19,7 +19,7 @@ import { SevenDayCardProps } from '@/utils/interfaces/component-props';
 const SevenDayCard: React.FC<SevenDayCardProps> = ({ date, description, iconUrl, highTemp, lowTemp }) => {
 
   return (
-    <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-7 m-3 text-lg w-36">
+    <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-7 m-3 text-lg w-36" data-testid="seven-day-card">
       <p className="text-black-500">{formatDateAbbreviation(date)}</p>
       <img src={iconUrl} alt="Weather Icon" className="w-36 h-20 my-4" />
       <p className="text-black-500">{formatWeatherDescription(description)}</p>

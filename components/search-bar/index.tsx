@@ -1,6 +1,6 @@
 'use-client'
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState, ChangeEvent, KeyboardEvent, FormEvent } from 'react';
 import { fetchWeatherData } from '@/services/weather-service';
 import { popularCities } from '@/data/popular-cities';
@@ -33,6 +33,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ responsiveWidth = false }) => {
     const [hourlyWeather, setHourlyWeather] = useAtom(hourlyWeatherAtom);
     const [multiDayWeather, setMultiDayWeather] = useAtom(multiDayWeatherAtom);
     const inputClassName = `search-bar ${responsiveWidth ? 'justify-start sm:w-96' : 'w-96'}`;
+
+    const router = useRouter();
 
     const updateSuggestion = (userInput: string) => {
         // Find the first city that starts with the user input
@@ -70,7 +72,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ responsiveWidth = false }) => {
             setCurrentWeather(result);
             setHourlyWeather(flattenedHours);
             setMultiDayWeather(result.forecast.forecastday);
-            const router = useRouter();
             router.push(`/dashboard/${inputValue}`);
             setErrorMessage('');
         }

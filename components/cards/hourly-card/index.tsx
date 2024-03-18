@@ -17,7 +17,7 @@ import { HourlyCardProps } from '@/utils/interfaces/component-props';
 const HourlyCard: React.FC<HourlyCardProps> = ({ hour, iconUrl, temp, description }) => {
 
   return (
-    <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4 m-2 w-28 text-sm">
+    <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-4 m-2 w-28 text-sm" data-testid="hourly-card">
       <p className="text-black-500">{formatDateHour(hour)}</p>
       <img src={iconUrl} alt="Weather Icon" />
       <p className="text-black-500">{formatWeatherDescription(description)}</p>
