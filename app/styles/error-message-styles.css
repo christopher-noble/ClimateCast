@@ -1,0 +1,27 @@
+.error-message {
+    @apply error-fade absolute top-full mt-11 px-4 py-2 bg-red-100 text-red-500 text-sm rounded-md w-full max-w-md mx-auto left-0 right-0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.error-fade {
+    animation: fadeIn 0.2s ease-in forwards;
+}

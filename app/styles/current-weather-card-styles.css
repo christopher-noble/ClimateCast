@@ -1,0 +1,7 @@
+.element-layout {
+    @apply flex justify-between items-center;
+}
+
+.current-detail-value-text {
+    @apply font-semibold;
+}

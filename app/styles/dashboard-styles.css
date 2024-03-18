@@ -1,0 +1,7 @@
+.scroll-area-primary {
+    @apply w-full whitespace-nowrap rounded-md;
+}
+
+.scroll-area-element {
+    @apply flex w-max space-x-4;
+}
