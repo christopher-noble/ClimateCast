@@ -62,7 +62,3 @@ Follow these instructions to get ClimateCast up and running on your local machin
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
-## Contact
-
-Project Link: [https://github.com/christopher-noble/ClimateCast](https://github.com/christopher-noble/ClimateCast)
