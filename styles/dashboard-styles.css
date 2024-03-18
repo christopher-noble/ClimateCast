@@ -1,0 +1,11 @@
+.scroll-area-container {
+    @apply w-full whitespace-nowrap rounded-md;
+}
+
+.scroll-area-primary {
+    @apply flex w-max space-x-4;
+}
+
+.card-container {
+    @apply flex justify-evenly items-center flex-wrap flex justify-evenly items-center flex-wrap;
+}

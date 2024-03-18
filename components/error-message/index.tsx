@@ -1,5 +1,5 @@
-import { MouseEventHandler } from "react";
-import '@/app/styles/error-message-styles.css'
+import React from 'react';
+import '@/styles/error-message-styles.css'
 import { ErrorMessageProps } from "@/utils/interfaces/component-props";
 
 const ErrorMessage: React.FC<ErrorMessageProps> = ({ showError, errorMessage, handleCloseError }) => {

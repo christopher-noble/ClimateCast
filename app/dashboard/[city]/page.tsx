@@ -1,12 +1,13 @@
 "use client"
 
+import React from 'react';
 import { useEffect, useState } from 'react'
 import CurrentWeatherCard from '@/components/cards/current-weather-card'
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
 import { currentWeatherAtom, hourlyWeatherAtom, multiDayWeatherAtom } from '@/store'
 import { useAtom } from 'jotai'
 import SevenDayCard from '@/components/cards/seven-day-card'
-import { fetchWeatherDataForCity } from '@/services/weather-service'
+import { fetchWeatherData } from '@/services/weather-service'
 import HourlyCard from '@/components/cards/hourly-card'
 import { isFutureHour } from '@/utils/dateTimeFormatter'
 import FourteenDayCard from '@/components/cards/fourteen-day-card'
@@ -15,6 +16,7 @@ import { WeatherApiResponseSuccess, ForecastDay, HourlyWeather } from '@/utils/i
 import NavBar from '@/components/nav-bar'
 import { DEFAULT_CITY, ERROR_MESSAGES, FORECAST_START, FOURTEEN_DAY_FORECAST_END, SEVEN_DAY_FORECAST_END, WEATHER_API_SUCCESS_FIELD } from '@/utils/constants'
 import { CityProps } from '@/utils/interfaces/page-props'
+import '@/styles/dashboard-styles.css';
 
 /**
  * Dashboard page component that displays weather information for a specified city.
@@ -36,8 +38,8 @@ const Dashboard: React.FC<CityProps> = ({ params }) => {
 
     useEffect(() => {
         if (currentWeather === null) {
-            const fetchDefaultWeather = async (): Promise<void> => {
-                const result = await fetchWeatherDataForCity(params.city || DEFAULT_CITY);
+            const getDefaultData = async (): Promise<void> => {
+                const result = await fetchWeatherData(params.city || DEFAULT_CITY);
                 if (WEATHER_API_SUCCESS_FIELD in result) {
                     setCurrentWeather(result);
                     setLoadingState(false);
@@ -52,7 +54,7 @@ const Dashboard: React.FC<CityProps> = ({ params }) => {
                     setError(ERROR_MESSAGES.INVALID_CITY);
                 }
             }
-            fetchDefaultWeather();
+            getDefaultData();
         }
         else {
             setLoadingState(false);
@@ -106,8 +108,8 @@ const Dashboard: React.FC<CityProps> = ({ params }) => {
                                         <LoadingSpinner />
                                     }
                                     <h1 className="label-primary">Hourly</h1>
-                                    <ScrollArea className="w-full whitespace-nowrap rounded-md">
-                                        <div className="flex w-max space-x-4">
+                                    <ScrollArea className="scroll-area-container">
+                                        <div className="scroll-area-primary">
                                             <div className="flex justify-center items-center flex-wrap">
                                                 {hourlyWeather ? hourlyWeather.map((element, index) => (
                                                     isFutureHour(element.time) ?
@@ -125,9 +127,9 @@ const Dashboard: React.FC<CityProps> = ({ params }) => {
                                         <ScrollBar orientation="horizontal" />
                                     </ScrollArea>
                                     <h1 className="label-primary">7 Day Trend</h1>
-                                    <ScrollArea className="w-full whitespace-nowrap rounded-md">
+                                    <ScrollArea className="scroll-area-container">
                                         <div className="scroll-area-primary">
-                                            <div className="flex justify-evenly items-center flex-wrap">
+                                            <div className="card-container">
                                                 {multiDayWeather ? multiDayWeather.slice(FORECAST_START, SEVEN_DAY_FORECAST_END).map((element, index) => (
                                                     <SevenDayCard
                                                         key={index}
@@ -144,9 +146,9 @@ const Dashboard: React.FC<CityProps> = ({ params }) => {
                                         <ScrollBar orientation="horizontal" />
                                     </ScrollArea>
                                     <h1 className="label-primary">14 Day Trend</h1>
-                                    <ScrollArea className="w-full whitespace-nowrap rounded-md">
-                                        <div className="flex w-max space-x-4">
-                                            <div className="flex justify-evenly items-center flex-wrap">
+                                    <ScrollArea className="scroll-area-container">
+                                        <div className="scroll-area-primary">
+                                            <div className="card-container">
                                                 {multiDayWeather ? multiDayWeather.slice(FORECAST_START, FOURTEEN_DAY_FORECAST_END).map((element, index) => (
                                                     <FourteenDayCard
                                                         key={index}

@@ -1,5 +1,6 @@
 "use client"
 
+import React from 'react';
 import { DEFAULT_CITY } from "@/utils/constants";
 import Dashboard from "./[city]/page";
 

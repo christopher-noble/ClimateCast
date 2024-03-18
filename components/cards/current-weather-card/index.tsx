@@ -1,7 +1,7 @@
 import React from 'react';
 import { formatDateVerbose, stripLeadingZero } from '@/utils/dateTimeFormatter';
 import { roundNumber } from '@/utils/helpers';
-import '@/app/styles/current-weather-card-styles.css'
+import '@/styles/current-weather-card-styles.css'
 import { CurrentWeatherCardProps } from '@/utils/interfaces/component-props';
 
 /**

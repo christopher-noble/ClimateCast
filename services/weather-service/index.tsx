@@ -1,6 +1,3 @@
-
-'use server'
-
 import { WEATHER_API_KEY } from "@/config/creds";
 import { WeatherApiResponseError, WeatherApiResponseSuccess } from "@/utils/interfaces/weather";
 
@@ -11,7 +8,7 @@ import { WeatherApiResponseError, WeatherApiResponseSuccess } from "@/utils/inte
 const REPORT_TYPE = 'forecast.json';
 const DAYS_FETCHED = 14;
 
-export const fetchWeatherDataForCity = async (city: string): Promise<WeatherApiResponseSuccess | WeatherApiResponseError> => {
+export const fetchWeatherData = async (city: string): Promise<WeatherApiResponseSuccess | WeatherApiResponseError> => {
   try {
     const response = await fetch(`https://api.weatherapi.com/v1/${REPORT_TYPE}?key=${WEATHER_API_KEY}&q=${city}&days=${DAYS_FETCHED}&aqi=no`);
     if (!response.ok) {

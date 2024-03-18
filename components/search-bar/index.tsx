@@ -1,13 +1,14 @@
 'use-client'
 
-import { useState, ChangeEvent, KeyboardEvent, FormEvent, useEffect, MouseEvent } from 'react';
-import { fetchWeatherDataForCity } from '@/services/weather-service';
+import React from 'react';
+import { useState, ChangeEvent, KeyboardEvent, FormEvent } from 'react';
+import { fetchWeatherData } from '@/services/weather-service';
 import { popularCities } from '@/data/popular-cities';
 import { useAtom } from 'jotai';
-import { currentWeatherAtom, hourlyWeatherAtom, multiDayWeatherAtom } from '@/store';
+import { currentWeatherAtom, hourlyWeatherAtom, multiDayWeatherAtom } from '../../store';
 import { useRouter } from 'next/navigation'
 import SearchButton from '../buttons/search-button';
-import '@/app/styles/search-bar-styles.css'
+import '@/styles/search-bar-styles.css'
 import { ENTER_KEY, ERROR_MESSAGES, WEATHER_API_SUCCESS_FIELD } from '@/utils/constants';
 import ErrorMessage from '../error-message';
 
@@ -31,8 +32,6 @@ const SearchBar: React.FC<SearchBarProps> = ({ responsiveWidth = false }) => {
     const [currentWeather, setCurrentWeather] = useAtom(currentWeatherAtom);
     const [hourlyWeather, setHourlyWeather] = useAtom(hourlyWeatherAtom);
     const [multiDayWeather, setMultiDayWeather] = useAtom(multiDayWeatherAtom);
-    const router = useRouter();
-
     const inputClassName = `search-bar ${responsiveWidth ? 'justify-start sm:w-96' : 'w-96'}`;
 
     const updateSuggestion = (userInput: string) => {
@@ -60,7 +59,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ responsiveWidth = false }) => {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        const result = await fetchWeatherDataForCity(inputValue);
+        const result = await fetchWeatherData(inputValue);
 
         if (WEATHER_API_SUCCESS_FIELD in result) {
             const flattenedHours = [
@@ -71,6 +70,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ responsiveWidth = false }) => {
             setCurrentWeather(result);
             setHourlyWeather(flattenedHours);
             setMultiDayWeather(result.forecast.forecastday);
+            const router = useRouter();
             router.push(`/dashboard/${inputValue}`);
             setErrorMessage('');
         }
@@ -92,6 +92,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ responsiveWidth = false }) => {
                 <input
                     type="text"
                     value={inputValue}
+                    data-testid="search-input"
                     onChange={handleInputChange}
                     onKeyDown={handleInputKeyDown}
                     className={inputClassName}
@@ -105,7 +106,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ responsiveWidth = false }) => {
                 </div>
                 <SearchButton />
             </form>
-            <ErrorMessage showError={showError} errorMessage={errorMessage} handleCloseError={handleCloseError}/>
+            <ErrorMessage showError={showError} errorMessage={errorMessage} handleCloseError={handleCloseError} />
         </main>
     );
 };

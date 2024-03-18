@@ -2,7 +2,7 @@
  * If a string is more than two words, return the first two words.
  */
 export const formatWeatherDescription = (str: string): string => {
-    const words = str.split(' ');
+    const words = str?.split(' ');
     if (words.length > 2) {
         return words.slice(0, 2).join(' ');
     }
@@ -13,8 +13,8 @@ export const formatWeatherDescription = (str: string): string => {
  * Extract the city name from a URL path.
  */
 export const extractCity = (path: string): string | any => {
-    const parts = path.split('/');
-    const city = parts.pop();
+    const parts = path?.split('/');
+    const city = parts?.pop();
     if (!city || city === '' || city == '/') {
         return null;
     }

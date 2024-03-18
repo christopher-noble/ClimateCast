@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { Provider } from 'jotai';
 import { usePathname } from 'next/navigation';
 import { extractCity } from '@/utils/helpers';

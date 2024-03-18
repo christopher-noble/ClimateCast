@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Footer from '@/components/footer'
+import React from 'react';
 
 export const metadata: Metadata = {
   title: 'ClimateCast',
@@ -15,12 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="flex flex-col min-h-screen">
           <main className="flex-grow">
             {children}
           </main>
           <Footer />
-        </div>
       </body>
     </html>
   )

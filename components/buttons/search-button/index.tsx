@@ -1,5 +1,6 @@
+import React from 'react';
 import Image from 'next/image';
-import '@/app/styles/search-button-styles.css';
+import '@/styles/search-button-styles.css';
 import { SEARCH_ICON_WIDTH_HEIGHT } from '@/utils/constants';
 
 /**
@@ -7,7 +8,7 @@ import { SEARCH_ICON_WIDTH_HEIGHT } from '@/utils/constants';
  * The button displays a search icon, leveraging the `Image` component from Next.js for optimized image loading.
  */
 
-const SearchButton = () => {
+const SearchButton: React.FC = () => {
     return (
         <button type="submit" className="search-button">
             <Image src="/search.png" alt="Search" width={SEARCH_ICON_WIDTH_HEIGHT} height={SEARCH_ICON_WIDTH_HEIGHT} />
