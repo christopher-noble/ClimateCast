@@ -80,18 +80,6 @@ Follow these instructions to get ClimateCast up and running on your local machin
 
 2. Open [http://localhost:3000](http://localhost:3000) to view the application in the browser.
 
-## Screenshots
-
-### Web View
-
-![Web View 1](./screenshots/page1_mobile.png)
-![Web View 2](./screenshots/page2_mobile.png)
-
-### Mobile View
-
-![Mobile View 1](./screenshots/page1_web.png)
-![Mobile View 2](./screenshots/page2_web.png)
-
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
