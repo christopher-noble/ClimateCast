@@ -29,3 +29,19 @@ export const roundNumber = (num: number, decimals: number = 0): number => {
     const factor = Math.pow(10, decimals);
     return Math.round(num * factor) / factor;
 };
+
+/**
+ * Return the name if it exists.
+ */
+export const isFullLocation = (city: string, region: string, country: string): string => {
+    if (city && region && country) {
+        return `${city}, ${region}, ${country}`;
+    }
+    else if (city && country) {
+        return `${city}, ${country}`;
+    }
+    else if (city) {
+        return city;
+    }
+    return '';
+}

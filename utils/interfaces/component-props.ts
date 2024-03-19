@@ -22,29 +22,24 @@ export interface CurrentWeatherCardProps {
     humidity: number,
     sunset: string;
     sunrise: string;
+    tempUnit: string,
 };
 
 export interface HourlyCardProps {
     key: React.Key;
     hour: string,
     iconUrl: string;
-    temp: string,
+    temp: number,
     description: string,
+    tempUnit: string
 }
 
-export interface SevenDayCardProps {
+export interface MultDayCardProps {
     key: React.Key;
     date: string,
     description: string,
     iconUrl: string;
     highTemp: number;
     lowTemp: number;
-}
-
-export interface FourteenDayCardProps {
-    key: React.Key;
-    date: string,
-    iconUrl: string;
-    highTemp: number;
-    lowTemp: number;
+    tempUnit: string
 }

@@ -12,6 +12,7 @@ export interface WeatherApiResponseSuccess {
     current: {
         last_updated: string;
         temp_c: number;
+        temp_f: number;
         condition: {
             text: string;
             icon: string;
@@ -41,8 +42,9 @@ export interface WeatherApiResponseError {
 }
 
 export interface HourlyWeather {
-    time: string;
-    temp_c: string;
+    time: number;
+    temp_c: number;
+    temp_f: number;
     condition: {
         text: string;
         icon: string;
@@ -65,6 +67,8 @@ export interface HourlyWeather {
 export interface ForecastDay {
     date: string;
     day: {
+        mintemp_f: number;
+        maxtemp_f: number;
         maxtemp_c: number;
         mintemp_c: number;
         avgtemp_c: number;

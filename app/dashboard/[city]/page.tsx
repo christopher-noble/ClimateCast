@@ -4,7 +4,7 @@ import React from 'react';
 import { useEffect, useState } from 'react'
 import CurrentWeatherCard from '@/components/cards/current-weather-card'
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
-import { currentWeatherAtom, hourlyWeatherAtom, multiDayWeatherAtom } from '@/store'
+import { currentWeatherAtom, hourlyWeatherAtom, multiDayWeatherAtom, temperatureUnitAtom } from '@/store'
 import { useAtom } from 'jotai'
 import SevenDayCard from '@/components/cards/seven-day-card'
 import { fetchWeatherData } from '@/services/weather-service'
@@ -17,6 +17,9 @@ import NavBar from '@/components/nav-bar'
 import { DEFAULT_CITY, ERROR_MESSAGES, FORECAST_START, FOURTEEN_DAY_FORECAST_END, SEVEN_DAY_FORECAST_END, WEATHER_API_SUCCESS_FIELD } from '@/utils/constants'
 import { CityProps } from '@/utils/interfaces/page-props'
 import '@/styles/dashboard-styles.css';
+import { isFullLocation } from '@/utils/helpers';
+import Reload from '@/components/buttons/reload-button';
+import TemperatureButton from '@/components/buttons/temperature-button';
 
 /**
  * Dashboard page component that displays weather information for a specified city.
@@ -35,6 +38,7 @@ const Dashboard: React.FC<CityProps> = ({ params }) => {
     const [multiDayWeather, setMultiDayWeather] = useAtom<ForecastDay[] | null>(multiDayWeatherAtom);
     const [loadingState, setLoadingState] = useState<boolean>(true);
     const [error, setError] = useState<string | null>('');
+    const [temperatureUnit, setTemperatureUnit] = useAtom(temperatureUnitAtom);
 
     useEffect(() => {
         if (currentWeather === null) {
@@ -61,6 +65,15 @@ const Dashboard: React.FC<CityProps> = ({ params }) => {
         }
     }, []);
 
+    const getTempByUnit = (cTemp: number, fTemp: number) => {
+        if (temperatureUnit === 'F') {
+            return fTemp;
+        }
+        else {
+            return cTemp;
+        }
+    }
+
     return (
         <>
             <div className="min-h-full">
@@ -75,11 +88,15 @@ const Dashboard: React.FC<CityProps> = ({ params }) => {
                     :
                     <>
                         <header className="bg-blue-50 shadow">
-                            <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+                            <div className="flex flex-col sm:flex-row justify-between mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                                 {currentWeather?.location?.name ?
-                                    <h1 className="subheading-primary">{`${currentWeather.location.name}, ${currentWeather.location.region}, ${currentWeather.location.country}`}</h1>
+                                    <h1 className="subheading-primary">{isFullLocation(currentWeather.location.name, currentWeather.location.region, currentWeather.location.country)}</h1>
                                     : <LoadingSpinner />
                                 }
+                                <div className='flex flex-row sm:justify-between space-x-6 sm:space-x-10 mt-5 sm:mt-0 w-full sm:w-auto'>
+                                    <TemperatureButton />
+                                    <Reload />
+                                </div>
                             </div>
                         </header>
                         <main>
@@ -90,7 +107,7 @@ const Dashboard: React.FC<CityProps> = ({ params }) => {
                                         <CurrentWeatherCard
                                             date={currentWeather.current.last_updated}
                                             description={currentWeather.current.condition.text}
-                                            temperature={currentWeather.current.temp_c}
+                                            temperature={getTempByUnit(currentWeather.current.temp_c, currentWeather.current.temp_f)}
                                             iconUrl={currentWeather.current.condition.icon}
                                             feelsLike={currentWeather.current.feelslike_c}
                                             uvIndex={currentWeather.current.uv}
@@ -99,10 +116,12 @@ const Dashboard: React.FC<CityProps> = ({ params }) => {
                                             humidity={currentWeather.current.humidity}
                                             windDegreee={currentWeather.current.wind_degree}
                                             windDirection={currentWeather.current.wind_dir}
-                                            highTemp={currentWeather.forecast.forecastday[0].day.maxtemp_c}
-                                            lowTemp={currentWeather.forecast.forecastday[0].day.mintemp_c}
+                                            highTemp={getTempByUnit(currentWeather.forecast.forecastday[0].day.maxtemp_c, currentWeather.forecast.forecastday[0].day.maxtemp_f)}
+                                            lowTemp={getTempByUnit(currentWeather.forecast.forecastday[0].day.mintemp_c, currentWeather.forecast.forecastday[0].day.mintemp_f)}
                                             sunrise={currentWeather.forecast.forecastday[0].astro.sunrise}
-                                            sunset={currentWeather.forecast.forecastday[0].astro.sunset}>
+                                            sunset={currentWeather.forecast.forecastday[0].astro.sunset}
+                                            tempUnit={temperatureUnit}
+                                        >
                                         </CurrentWeatherCard>
                                         :
                                         <LoadingSpinner />
@@ -112,13 +131,15 @@ const Dashboard: React.FC<CityProps> = ({ params }) => {
                                         <div className="scroll-area-primary">
                                             <div className="flex justify-center items-center flex-wrap">
                                                 {hourlyWeather ? hourlyWeather.map((element, index) => (
-                                                    isFutureHour(element.time) ?
+                                                    isFutureHour(element.time.toString()) ?
                                                         <HourlyCard
                                                             key={index}
-                                                            hour={element.time}
-                                                            temp={element.temp_c}
+                                                            hour={element.time.toString()}
+                                                            temp={getTempByUnit(element.temp_c, element.temp_f)}
                                                             iconUrl={element.condition.icon}
-                                                            description={element.condition.text} /> : ''
+                                                            description={element.condition.text}
+                                                            tempUnit={temperatureUnit}
+                                                        /> : ''
                                                 ))
                                                     : <LoadingSpinner />
                                                 }
@@ -135,9 +156,11 @@ const Dashboard: React.FC<CityProps> = ({ params }) => {
                                                         key={index}
                                                         date={element.date}
                                                         iconUrl={element.day.condition.icon}
-                                                        highTemp={element.day.maxtemp_c}
-                                                        lowTemp={element.day.mintemp_c}
-                                                        description={element.day.condition.text} />
+                                                        highTemp={getTempByUnit(element.day.maxtemp_c, element.day.maxtemp_f)}
+                                                        lowTemp={getTempByUnit(element.day.mintemp_c, element.day.mintemp_f)}
+                                                        description={element.day.condition.text}
+                                                        tempUnit={temperatureUnit}
+                                                    />
                                                 ))
                                                     : <LoadingSpinner />
                                                 }
@@ -154,9 +177,10 @@ const Dashboard: React.FC<CityProps> = ({ params }) => {
                                                         key={index}
                                                         date={element.date}
                                                         iconUrl={element.day.condition.icon}
-                                                        highTemp={element.day.maxtemp_c}
-                                                        lowTemp={element.day.mintemp_c}
-                                                    />
+                                                        highTemp={getTempByUnit(element.day.maxtemp_c, element.day.maxtemp_f)}
+                                                        lowTemp={getTempByUnit(element.day.mintemp_c, element.day.mintemp_f)}
+                                                        tempUnit={temperatureUnit}
+                                                        description={''} />
                                                 ))
                                                     : <LoadingSpinner />
                                                 }

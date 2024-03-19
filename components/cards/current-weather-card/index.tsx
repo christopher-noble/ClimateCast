@@ -25,6 +25,7 @@ import { CurrentWeatherCardProps } from '@/utils/interfaces/component-props';
  * - humidity: Air humidity percentage.
  * - sunset: Sunset time.
  * - sunrise: Sunrise time.
+ * - tempUnit: The temperature unit, either celcius or farenheight.
  **/
 
 const CurrentWeatherCard: React.FC<CurrentWeatherCardProps> = ({
@@ -43,6 +44,7 @@ const CurrentWeatherCard: React.FC<CurrentWeatherCardProps> = ({
   humidity,
   sunset,
   sunrise,
+  tempUnit
 }) => {
   return (
     <div className="flex shadow-lg bg-white rounded-lg ml-6 mr-6" data-testid="current-weather-card">
@@ -56,18 +58,18 @@ const CurrentWeatherCard: React.FC<CurrentWeatherCardProps> = ({
           </div>
           <div className="text-center relative -translate-y-6">
             <img src={iconUrl} alt="Weather Icon" className="w-44 h-44 mt-0 inline-block" />
-            <p className="text-6xl font-bold mb-5">{roundNumber(temperature)}°C</p>
-            <p>Feels like {roundNumber(feelsLike)}°C</p>
+            <p className="text-6xl font-bold mb-5">{roundNumber(temperature)}°{tempUnit}</p>
+            <p>Feels like {roundNumber(feelsLike)}°{tempUnit}</p>
           </div>
         </div>
         <div className="space-y-4 text-xl">
           <div className="element-layout">
             <p>High</p>
-            <p className="current-detail-value-text">{roundNumber(highTemp)}°C</p>
+            <p className="current-detail-value-text">{roundNumber(highTemp)}°{tempUnit}</p>
           </div>
           <div className="element-layout">
             <p>Low</p>
-            <p className="current-detail-value-text">{roundNumber(lowTemp)}°C</p>
+            <p className="current-detail-value-text">{roundNumber(lowTemp)}°{tempUnit}</p>
           </div>
           <div className="element-layout">
             <p>UV Index</p>

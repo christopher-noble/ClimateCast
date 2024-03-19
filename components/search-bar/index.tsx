@@ -93,7 +93,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ responsiveWidth = false }) => {
                 <input
                     type="text"
                     value={inputValue}
-                    data-testid="search-input"
+                    data-testid="search-bar-input"
+                    id="search-bar-input"
+                    name="seaerch-bar-input"
                     onChange={handleInputChange}
                     onKeyDown={handleInputKeyDown}
                     className={inputClassName}

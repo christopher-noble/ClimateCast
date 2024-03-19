@@ -29,7 +29,7 @@ jest.mock("next/navigation", () => ({
 describe('SearchBar', () => {
   it('renders without crashing', () => {
     render(<SearchBar />);
-    const searchBar = screen.getByTestId('search-input') as HTMLInputElement
+    const searchBar = screen.getByTestId('search-bar-input') as HTMLInputElement
     expect(searchBar).toBeInTheDocument();
   });
 });
