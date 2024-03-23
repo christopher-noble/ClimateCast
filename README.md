@@ -72,7 +72,7 @@ Follow these instructions to get ClimateCast up and running on your local machin
 3. Install dependencies:
  `npm install`
 
-4. Load the `.env` file sent via email into the root directory of the app. This file contains essential environment variables required for the app to run correctly.
+4. Load the `.env.local` file sent via email into the root directory of the app. This file contains essential environment variables required for WeatherAPI.com.
 
 ### Running the Application
 
