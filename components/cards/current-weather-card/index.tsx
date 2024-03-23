@@ -3,6 +3,7 @@ import { formatDateVerbose, stripLeadingZero } from '@/utils/dateTimeFormatter';
 import { roundNumber } from '@/utils/helpers';
 import '@/styles/current-weather-card-styles.css'
 import { CurrentWeatherCardProps } from '@/utils/interfaces/component-props';
+import { iconMap } from '@/data/icons/icon-map';
 
 /**
  * CurrentWeatherCard component displays detailed current weather information.
