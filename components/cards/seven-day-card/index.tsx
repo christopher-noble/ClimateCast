@@ -2,6 +2,7 @@ import React from 'react';
 import { formatWeatherDescription, roundNumber } from '@/utils/helpers';
 import { formatDateAbbreviation } from '@/utils/dateTimeFormatter';
 import { MultDayCardProps } from '@/utils/interfaces/component-props';
+import Image from 'next/image';
 
 /**
  * SevenDayCard component displays a concise summary of the weather forecast for a specific day,
@@ -22,7 +23,7 @@ const SevenDayCard: React.FC<MultDayCardProps> = ({ date, description, iconUrl, 
   return (
     <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-7 m-3 text-lg w-36" data-testid="seven-day-card">
       <p className="text-black-500">{formatDateAbbreviation(date)}</p>
-      <img src={iconUrl} alt="Weather Icon" className="w-36 h-20 my-4" />
+      <img src={iconUrl} alt="Weather Icon" className="w-40 h-30 my-4" />
       <p className="text-black-500">{formatWeatherDescription(description)}</p>
       <p className="font-semibold mt-4">High: {roundNumber(highTemp)}°{tempUnit}</p>
       <p className="text-blue-500">Low: {roundNumber(lowTemp)}°{tempUnit}</p>
