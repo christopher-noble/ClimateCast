@@ -1,6 +1,6 @@
 # ClimateCast
 
-ClimateCast is a responsive, user-friendly weather dashboard application that provides real-time weather information for cities around the globe. Built with Next.js, React, TypeScript, and Tailwind UI components, it features an elegant design with intuitive navigation. The application integrates WeatherAPI.com for weather data, supporting both Celsius and Fahrenheit units, and includes features like autocomplete search and error handling for invalid inputs.
+ClimateCast is a responsive, user-friendly weather dashboard application that provides real-time weather information for cities around the globe. Built with Next.js, React, TypeScript, and Tailwind UI components, it features an elegant design with intuitive navigation. The application integrates WeatherAPI.com for weather data, supporting both Celsius and Fahrenheit units, and includes features like autocomplete search and error handling for invalid inputs. Try it in production! [ClimateCast.vercel.app](https://climatecast.vercel.app/)
 
 ## Features
 
@@ -11,6 +11,7 @@ ClimateCast is a responsive, user-friendly weather dashboard application that pr
 - **Responsive Design:** Built with Tailwind UI components for a mobile-responsive layout.
 - **Iconography:** Uses weather icons from WeatherAPI.com and FontAwesome for enhanced UI.
 - **Comprehensive Testing:** Includes Jest for unit testing and Cypress for end-to-end testing.
+- **Automatic Data Caching:** Leveraging Next.js's built-in data caching, ClimateCast automatically caches the returned values of fetch in the Data Cache on the server. This optimization enhances performance and user experience by reducing load times for frequently accessed weather data.
 
 ## Tech Stack
 
