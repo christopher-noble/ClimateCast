@@ -48,7 +48,7 @@ const Dashboard: React.FC<CityProps> = ({ params }) => {
                     setCurrentWeather(result);
                     setLoadingState(false);
 
-                    // To get the next 24 hours, we get the first 48 hours, which is subject to a conditional statement
+                    // To get the next 24 hours, we get the first 48 hours, which is subject to a conditional statement later
                     const flattenedHours = [
                         ...result?.forecast.forecastday[0].hour,
                         ...result?.forecast.forecastday[1].hour,
