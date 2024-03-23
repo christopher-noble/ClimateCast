@@ -8,7 +8,7 @@ import { ErrorMessageProps } from "@/utils/interfaces/component-props";
 
 const ErrorMessage: React.FC<ErrorMessageProps> = ({ showError, errorMessage, handleCloseError }) => {
     return (
-        <main>
+        <main className='relative z-10'>
             {showError && (
                 <div className={`error-message ${!showError ? 'hide' : ''}`}>
                     {errorMessage}
