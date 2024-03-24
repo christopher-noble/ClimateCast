@@ -2,7 +2,9 @@ import { WEATHER_API_KEY } from "@/config/creds";
 import { WeatherApiResponseError, WeatherApiResponseSuccess } from "@/utils/interfaces/weather";
 
 /**
- * Service for RESTful requests to WeatherAPI.com
+ * Service for GET request to WeatherAPI.com.
+ * @param city the city to for current weather
+ * @returns object containing the current weather and forecast for next 14 days
  */
 
 const REPORT_TYPE = 'forecast.json';
